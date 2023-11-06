@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 516820879283964575}
   - component: {fileID: 4797824515814041413}
   - component: {fileID: 236808325282160299}
+  - component: {fileID: 1780766353462571591}
   m_Layer: 0
   m_Name: Bomb
   m_TagString: Untagged
@@ -46,12 +47,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8e66c701b7034b419953f17d9f4e1ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bombSettings:
-  - {fileID: 11400000, guid: 10ed5553124913547a9558086461ab5f, type: 2}
-  - {fileID: 11400000, guid: 57a122ffb66ce964a8f97eb63bb4fe8d, type: 2}
-  - {fileID: 11400000, guid: 060dcde937f75d74ea4b7a4c4955d2da, type: 2}
-  - {fileID: 11400000, guid: 2c822870ed1b625409af441add564e98, type: 2}
-  - {fileID: 11400000, guid: 3bbd7786d2a87c3499120a9e408f97cd, type: 2}
 --- !u!82 &4797824515814041413
 AudioSource:
   m_ObjectHideFlags: 0
@@ -62,11 +57,11 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 49477adfb560889499dc7d8079d5125e, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -165,7 +160,6 @@ MonoBehaviour:
   volumeBehindWall: 0.5
   minPitch: 0
   maxPitch: 0
-  bomb: {fileID: 0}
   maxDistanceMultiplier: 2
   volumeDropoff:
     serializedVersion: 2
@@ -191,3 +185,22 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1780766353462571591
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 516820879283964572}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a2d3fd52c66aa24a91c3ad813ab7103, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _bombSettings:
+  - {fileID: 11400000, guid: a74da80d147777247a8989d6109a09ad, type: 2}
+  - {fileID: 11400000, guid: 5b6027ec4d1a27140a86a432ed719556, type: 2}
+  - {fileID: 11400000, guid: 4d50f426d69bb374baa1702915bcd0a6, type: 2}
+  - {fileID: 11400000, guid: 82577ba4567d7bc4ca06ed9e3593bf95, type: 2}
+  - {fileID: 11400000, guid: b1ed3036a87088740a87eda6887237e3, type: 2}
+  _ShowSound: 0

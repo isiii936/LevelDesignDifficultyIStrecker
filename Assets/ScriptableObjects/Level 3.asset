@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Level 3
   m_EditorClassIdentifier: 
   _levelTimer: 60
-  _bombRadius: 0
-  _SoundRadius: 0
+  _bombRadius: 4
+  _SoundRadius: 3
   _tickVolume: 0
