@@ -1,25 +1,32 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class Bomb : MonoBehaviour
 {
-    [SerializeField] public SettingsScriptable[] bombSettings;
+    SettingsScriptable[] _bombSettings;
+
+    private void Start()
+    {
+        _bombSettings = GameManager.s_instance.bombSettings;
+    }
 
     void Update()
     {
-
-        if ((Camera.main.transform.position - transform.position).magnitude <= bombSettings[GameController.instance.currentLevel].BombRadius)
+        if ((Camera.main.transform.position - transform.position).magnitude <= _bombSettings[GameManager.s_instance.currentLevel].BombRadius)
         {
-            GameController.instance.AddDeath();
+            GameManager.s_instance.Death();
         }
     }
 
+    
+    /*
     private void OnDrawGizmos()
     {
-        for (int i = 0; i < bombSettings.Length; i++)
+        for (int i = 0; i < _bombSettings.Length; i++)
         {
-            Gizmos.DrawWireSphere(transform.position, bombSettings[i].BombRadius);
+            Gizmos.DrawWireSphere(transform.position, _bombSettings[i].BombRadius);
             switch (i +1)
             {
                 case 0: Gizmos.color = Color.cyan; break;
@@ -29,6 +36,6 @@ public class Bomb : MonoBehaviour
                 case 4: Gizmos.color = Color.magenta; break;
             }
         }
-
     }
+    */
 }

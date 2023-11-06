@@ -13,7 +13,6 @@ public class SpatialAudio : MonoBehaviour
     private float basePitch;
     [SerializeField] float minPitch;
     [SerializeField] float maxPitch;
-    public Bomb bomb;
 
     [Header("Spatial Audio Values")]
     private float minimumDistance;
@@ -29,10 +28,10 @@ public class SpatialAudio : MonoBehaviour
     private void Start()
     {
         audioSource = GetComponent<AudioSource>();
-        baseVolume = audioSource.volume * bomb.bombSettings[GameController.instance.currentLevel].TickVolume;
+        baseVolume = audioSource.volume * GameManager.s_instance.bombSettings[GameManager.s_instance.currentLevel].tickVolume;
         basePitch = audioSource.pitch;
-        minimumDistance = bomb.bombSettings[GameController.instance.currentLevel].BombRadius;
-        maximumDistance = bomb.bombSettings[GameController.instance.currentLevel].BombRadius * maxDistanceMultiplier;
+        minimumDistance = GameManager.s_instance.bombSettings[GameManager.s_instance.currentLevel].SoundRadius;
+        maximumDistance = GameManager.s_instance.bombSettings[GameManager.s_instance.currentLevel].SoundRadius * maxDistanceMultiplier;
     }
 
     private void Update()

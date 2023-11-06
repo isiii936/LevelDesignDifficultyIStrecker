@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d69e491da2b67124584a4200d8cf84ba, type: 3}
   m_Name: Level 1
   m_EditorClassIdentifier: 
-  levelTimer: 20
-  bombRadius: 2
-  tickVolume: 1
+  _levelTimer: 10
+  _bombRadius: 5
+  _SoundRadius: 6
+  _tickVolume: 1
