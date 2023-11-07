@@ -35,9 +35,59 @@ namespace Base
             {
                 for (int i = 0; i < timer.Count; i++) AsyncCountdown(i);
             }
+
+            //StopWatch Timer
+            if (WatchIDs.Count > 0)
+            {
+                for (int i = 0; i < WatchIDs.Count; i++) StopWatchCountUp(WatchIDs[i]);
+            }
         }
 
-        
+        #region StopWatch
+        private List<string> WatchIDs = new List<string>();
+        Dictionary<string, float> _StopWatch = new Dictionary<string, float>();
+        Dictionary<string, bool> _PauseWatch = new Dictionary<string, bool>();
+
+        public void CreateStopWatch(string myID)
+        {
+            if (_StopWatch.ContainsKey(myID)) return;
+            WatchIDs.Add(myID);
+            _StopWatch.Add(myID, 0f);
+            _PauseWatch.Add(myID, false);
+        }
+
+        public void PauseStopWatch(string myID, bool myPause = true)
+        {
+            if (!_StopWatch.ContainsKey(myID)) return;
+            _PauseWatch[myID] = myPause;
+        }
+
+        public void DeleteStopWatch(string myID)
+        {
+            if (!_StopWatch.ContainsKey(myID)) return;
+            WatchIDs.Remove(myID);
+            _StopWatch.Remove(myID);
+            _PauseWatch.Remove(myID);
+        }
+
+        public void ResetStopWatch(string myID)
+        {
+            if (!_StopWatch.ContainsKey(myID)) return;
+            _StopWatch[myID] = 0f;
+        }
+
+        public float getStopWatchTime(string myID)
+        {
+            return _StopWatch.ContainsKey(myID) ? _StopWatch[myID] : 0f;
+        }
+
+        void StopWatchCountUp(string myID)
+        {
+            if (!_StopWatch.ContainsKey(myID)) return;
+            if (_PauseWatch[myID]) return;
+            _StopWatch[myID] += Time.deltaTime % 60;
+        }
+        #endregion
 
         #region Individual Timer
 
@@ -45,7 +95,7 @@ namespace Base
         private Dictionary<Action, float> timerTime = new Dictionary<Action, float>();
         private Dictionary<Action, bool> timerPause = new Dictionary<Action, bool>();
 
-        public void Countdown(Action index)
+        void Countdown(Action index)
         {
             if (timerPause[index]) return;
             if (timerTime[index] > 0)

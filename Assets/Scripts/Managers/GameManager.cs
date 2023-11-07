@@ -22,6 +22,9 @@ public class GameManager : MonoBehaviour
 
     public event Action onDeath;
     public event Action onWin;
+    public event Action onWinUI;
+
+    public const string StopWatchID = "GameWatch"; 
 
     string _BombTimerStr;
     public string BombTimerStr
@@ -45,11 +48,6 @@ public class GameManager : MonoBehaviour
 
     public GameObject pauseContainer, menuContainer, gameOverContainer, uiContainer;
 
-
-    //Gameplay
-    public TextMeshProUGUI deathText, timerText;
-    //EndScreen
-    public TextMeshProUGUI finalDeaths;
 
     void Awake()
     {
@@ -77,6 +75,9 @@ public class GameManager : MonoBehaviour
         _bombPlacement[_currentLevel].SetActive(true);
         GlobalTimer.Timer.DeleteTimer(_BombAction);
         GlobalTimer.Timer.SetTimer(_BombTimer, _BombAction);
+        GlobalTimer.Timer.CreateStopWatch(StopWatchID);
+        GlobalTimer.Timer.ResetStopWatch(StopWatchID);
+        GlobalTimer.Timer.PauseStopWatch(StopWatchID, false);
     }
     public void PauseGame()
     {
@@ -107,10 +108,15 @@ public class GameManager : MonoBehaviour
     {
         if(_bombPlacement.Length > 0 && _bombPlacement.Length-1 >= _currentLevel)
         {
-            deaths = 0;
-            _currentLevel++;
-            StartUpLevel(_currentLevel);
-            onWin?.Invoke();
+            onWinUI?.Invoke();
+            gameOverContainer.SetActive(true);
+            GlobalTimer.Timer.PauseStopWatch(StopWatchID);
+            Debug.Log("Time: "+GlobalTimer.Timer.getStopWatchTime(StopWatchID));
+            GlobalTimer.Timer.SetTimer(5f, () => _currentLevel++);
+            GlobalTimer.Timer.SetTimer(5f, () => StartUpLevel(_currentLevel));
+            GlobalTimer.Timer.SetTimer(5.1f, () => gameOverContainer.SetActive(false));
+            GlobalTimer.Timer.SetTimer(5.1f, () => onWin?.Invoke());
+            GlobalTimer.Timer.SetTimer(4f, () => deaths = 0);
         }
 
         Debug.Log(_currentLevel);
