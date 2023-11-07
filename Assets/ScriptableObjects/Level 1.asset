@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Level 1
   m_EditorClassIdentifier: 
   _levelTimer: 10
-  _bombRadius: 5
+  _bombRadius: 3
   _SoundRadius: 6
   _tickVolume: 1
